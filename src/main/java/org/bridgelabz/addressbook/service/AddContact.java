@@ -10,7 +10,7 @@ public class AddContact {
 
     public void addContact(){
         System.out.println("enter the details:");
-        System.out.println("enter first name\n");
+        System.out.println("enter first name");
         String temp = scanner.next();
         first_name.add(temp);
         System.out.println("enter last name");
