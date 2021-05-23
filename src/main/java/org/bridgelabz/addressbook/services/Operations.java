@@ -1,15 +1,46 @@
 package org.bridgelabz.addressbook.services;
 
+import org.bridgelabz.addressbook.utility.AddressBook;
 import org.bridgelabz.addressbook.utility.Person;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.bridgelabz.addressbook.controller.Controller.scanner;
 
-public class Operations implements IoServices {
-    public static ArrayList<Person> addressbook1 = new ArrayList<Person>();
+public class Operations {
+    public static HashMap<String, AddressBook> multiplebook = new HashMap<String, AddressBook>();
 
-    public void add(){
+
+    public void addbooks(String key, AddressBook ad){
+        System.out.println(ad.toString());
+        if(multiplebook.containsKey(key)){
+                AddressBook temps= new AddressBook();
+                temps=multiplebook.get(key);
+            for (Person allperson : ad.getAddressbooks()) {
+                temps.getAddressbooks().add(allperson);
+            }
+                multiplebook.put(key,temps);
+            }
+        else{
+            AddressBook temps1= new AddressBook();
+            for (Person allperson : ad.getAddressbooks()) {
+                temps1.getAddressbooks().add(allperson);
+            }
+            multiplebook.put(key,temps1);
+        }
+
+    }
+
+    public void print(){
+        multiplebook.entrySet().forEach( entry -> {
+            System.out.println( entry.getKey() + " => " + entry.getValue().addressbooks.toString() );
+        });
+    }
+
+    public AddressBook add(){
+        AddressBook addressBook = new AddressBook();
+        ArrayList<Person> temp_book = new ArrayList<Person>();
         Person person_new = new Person();
         System.out.println("enter details of new contact");
         System.out.println("enter first name:");
@@ -28,55 +59,61 @@ public class Operations implements IoServices {
         person_new.phone_number = scanner.next();
         System.out.println("Enter Email");
         person_new.email= scanner.next();
-        addressbook1.add(person_new);
+        temp_book.add(person_new);
+        addressBook.setAddressbooks(temp_book);
+        System.out.println("this is arraylist"+addressBook.addressbooks.toString());
+        return addressBook;
     }
-    public void edit(int edit_choice){
+    public void edit(String key,int edit_choice){
         System.out.println("enter the first name of contact");
         String firstname = scanner.next();
         String value = scanner.next();
-        addressbook1.forEach(p->{
-            if(p.getFirst_name().equalsIgnoreCase(firstname))
-                switch (edit_choice){
+        for(int i=0;i<multiplebook.get(key).getAddressbooks().size();i++) {
+            if (multiplebook.get(key).getAddressbooks().get(i).getFirst_name().equalsIgnoreCase(firstname))
+                switch (edit_choice) {
                     case 1:
-                        p.setFirst_name(value);
+                        multiplebook.get(key).getAddressbooks().get(i).setFirst_name(value);
                         break;
                     case 2:
-                        p.setLast_name(value);
+                        multiplebook.get(key).getAddressbooks().get(i).setLast_name(value);
                         break;
                     case 3:
-                        p.setAddress(value);
+                        multiplebook.get(key).getAddressbooks().get(i).setAddress(value);
                         break;
                     case 4:
-                        p.setCity(value);
+                        multiplebook.get(key).getAddressbooks().get(i).setCity(value);
                         break;
                     case 5:
-                        p.setState(value);
+                        multiplebook.get(key).getAddressbooks().get(i).setState(value);
                         break;
                     case 6:
-                        p.setZip(value);
+                        multiplebook.get(key).getAddressbooks().get(i).setZip(value);
                         break;
                     case 7:
-                        p.setPhone_number(value);
+                        multiplebook.get(key).getAddressbooks().get(i).setPhone_number(value);
                         break;
                     case 8:
-                        p.setEmail(value);
+                        multiplebook.get(key).getAddressbooks().get(i).setEmail(value);
                         break;
 
                 }
-
-        });
-
+        }
     }
-    public void delete(){
-        System.out.println("............delete menu...........");
+    public void deletePerson(String key) {
         System.out.println("enter the first name of contact");
         String firstname = scanner.next();
-        for(int i=0;i< addressbook1.size();i++){
-            if(addressbook1.get(i).getFirst_name().equalsIgnoreCase(firstname))
-                addressbook1.remove(i);
+        for (int i = 0; i < multiplebook.get(key).getAddressbooks().size(); i++) {
+            if (multiplebook.get(key).getAddressbooks().get(i).getFirst_name().equalsIgnoreCase(firstname))
+                multiplebook.get(key).getAddressbooks().remove(i);
         }
-
+    }
+    public void showBooks(){
+        System.out.println(multiplebook.keySet());
+    }
+    public void printbook(String key){
+        System.out.println(multiplebook.get(key).addressbooks.toString());
     }
 
 
-}
+    }
+
