@@ -10,7 +10,7 @@ import static org.bridgelabz.addressbook.services.Operations.multiplebook;
 
 
 public class Controller {
-    public Operations operator = new Operations();
+    public IoServices operator = new Operations();
     public static final Scanner scanner = new Scanner(System.in);
 
     public int menu(){

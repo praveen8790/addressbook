@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 import static org.bridgelabz.addressbook.controller.Controller.scanner;
 
-public class Operations {
+public class Operations implements IoServices{
     public static HashMap<String, AddressBook> multiplebook = new HashMap<String, AddressBook>();
 
 
