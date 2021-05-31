@@ -1,5 +1,6 @@
 package org.bridgelabz.addressbook.controller;
 
+import org.bridgelabz.addressbook.entity.AddressBook;
 import org.bridgelabz.addressbook.services.IoServices;
 import org.bridgelabz.addressbook.services.Operations;
 import org.bridgelabz.addressbook.entity.Person;
@@ -17,17 +18,16 @@ public class Controller {
         int exit_status = 0;
         System.out.println("enter number corresponding to ur choice");
         System.out.println("1.add new addressbook\n"+"2.view and choose available addressbooks\n"+"3.print all addressbooks\n"+
-                "4. Search by city or state"+"5.exit");
+                "4. Search by city or state\n"+"5.exit");
         int option = scanner.nextInt();
         switch (option){
             case 1:
                 System.out.println("enter name for address book");
                 String key=scanner.next();
-                operator.addbooks(key, operator.add(null));
+                operator.addbooks(key, new AddressBook());
                 break;
             case 2:
                 int exit_status1=0;
-
                 System.out.println("the address books available are");
                 operator.showBooks();
                 System.out.println("type addressbook name to go into the addressbook");
@@ -36,7 +36,6 @@ public class Controller {
                 if(multiplebook.containsKey(opted_key))
                     while(exit_status1==0){
                         exit_status1=menu1(opted_key);
-
                     }
 
                 break;
@@ -48,12 +47,12 @@ public class Controller {
                 int cityorstate = scanner.nextInt();
                 System.out.println("enter the name of city or state");
                 String value = scanner.next();
+                operator.dictionaryByCityORState();
                 operator.searchByCityOrState(cityorstate,value);
+                break;
             case 5:
                 exit_status=1;
                 break;
-
-
         }
         return  exit_status;
     }

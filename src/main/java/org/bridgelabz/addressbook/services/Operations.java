@@ -12,9 +12,11 @@ import static org.bridgelabz.addressbook.controller.Controller.scanner;
 
 public class Operations implements IoServices{
     public static HashMap<String, AddressBook> multiplebook = new HashMap<String, AddressBook>();
+    public static HashMap<String, ArrayList<Person>> bookbycity = new HashMap<>();
+    public static HashMap<String, ArrayList<Person>> bookbystate = new HashMap<>();
 
 
-    public void addbooks(String key, AddressBook ad){
+    public void addbooks(String key,AddressBook ad){
 
         if(multiplebook.containsKey(key)){
             AddressBook temps= new AddressBook();
@@ -50,7 +52,6 @@ public class Operations implements IoServices{
                         person.getLast_name().equalsIgnoreCase(person_new.getLast_name())){
                     flag.set(1);
                 }
-
             });
         });
         if(flag.get()==0) {
@@ -119,7 +120,7 @@ public class Operations implements IoServices{
     }
 
     public void searchByCityOrState(int cityorstate,String value){
-        multiplebook.entrySet().forEach(entry ->{
+        /*multiplebook.entrySet().forEach(entry ->{
             entry.getValue().getAddressbooks().forEach(person -> {
                         switch (cityorstate){
                             case 1:
@@ -132,10 +133,49 @@ public class Operations implements IoServices{
                                 break;
                         }
                     });
+                });*/
+        switch (cityorstate){
+            case 1:
+                bookbycity.get(value).forEach(person -> {
+                    System.out.println(person.toString());
                 });
-
-
+                break;
+            case 2:
+                bookbystate.get(value).forEach(person -> {
+                    System.out.println(person.toString());
+                });
+        }
     }
+
+    public void dictionaryByCityORState(){
+        multiplebook.entrySet().forEach(entry -> {
+            entry.getValue().getAddressbooks().forEach(person ->{
+                if(bookbycity.containsKey(person.getCity())){
+                    ArrayList<Person> temps= new ArrayList<>();
+                    temps=bookbycity.get(person.getCity());
+                    temps.add(person);
+                    bookbycity.put(person.getCity(),temps);
+                }
+                else{
+                    ArrayList<Person> temps1= new ArrayList<>();
+                    temps1.add(person);
+                    bookbycity.put(person.getCity(),temps1);
+                }
+                if(bookbystate.containsKey(person.getState())){
+                    ArrayList<Person> temps= new ArrayList<>();
+                    temps=bookbystate.get(person.getState());
+                    temps.add(person);
+                    bookbystate.put(person.getState(),temps);
+                }
+                else{
+                    ArrayList<Person> temps1= new ArrayList<>();
+                    temps1.add(person);
+                    bookbystate.put(person.getState(),temps1);
+                }
+            });
+        });
+    }
+
 
 
 }

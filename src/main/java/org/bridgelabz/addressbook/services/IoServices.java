@@ -14,4 +14,5 @@ public interface IoServices {
     void showBooks();
     void printbook(String key);
     void searchByCityOrState(int cityorstate,String value);
+    void dictionaryByCityORState();
 }
