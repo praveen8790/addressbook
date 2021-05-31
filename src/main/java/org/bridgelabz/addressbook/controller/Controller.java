@@ -37,7 +37,6 @@ public class Controller {
                     while(exit_status1==0){
                         exit_status1=menu1(opted_key);
                     }
-
                 break;
             case 3:
                 operator.print();
