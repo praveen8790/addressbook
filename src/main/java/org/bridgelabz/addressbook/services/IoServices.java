@@ -13,4 +13,5 @@ public interface IoServices {
     void deletePerson(String key);
     void showBooks();
     void printbook(String key);
+    void searchByCityOrState(int cityorstate,String value);
 }

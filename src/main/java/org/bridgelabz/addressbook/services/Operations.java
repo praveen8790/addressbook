@@ -6,6 +6,7 @@ import org.bridgelabz.addressbook.entity.Person;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 import static org.bridgelabz.addressbook.controller.Controller.scanner;
 
@@ -115,6 +116,25 @@ public class Operations implements IoServices{
     }
     public void printbook(String key){
         System.out.println(multiplebook.get(key).addressbooks.toString());
+    }
+
+    public void searchByCityOrState(int cityorstate,String value){
+        multiplebook.entrySet().forEach(entry ->{
+            entry.getValue().getAddressbooks().forEach(person -> {
+                        switch (cityorstate){
+                            case 1:
+                                if(person.getCity().equalsIgnoreCase(value))
+                                    System.out.println(person.toString());
+                                break;
+                            case 2:
+                                if(person.getState().equalsIgnoreCase(value))
+                                    System.out.println(person.toString());
+                                break;
+                        }
+                    });
+                });
+
+
     }
 
 
