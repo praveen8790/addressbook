@@ -1,4 +1,4 @@
-package org.bridgelabz.addressbook.utility;
+package org.bridgelabz.addressbook.entity;
 
 public class Person {
     public String first_name,last_name,address,city,state,zip,phone_number,email;

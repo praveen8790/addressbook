@@ -1,10 +1,11 @@
 package org.bridgelabz.addressbook.services;
 
-import org.bridgelabz.addressbook.utility.AddressBook;
-import org.bridgelabz.addressbook.utility.Person;
+import org.bridgelabz.addressbook.entity.AddressBook;
+import org.bridgelabz.addressbook.entity.Person;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.bridgelabz.addressbook.controller.Controller.scanner;
 
@@ -13,15 +14,15 @@ public class Operations implements IoServices{
 
 
     public void addbooks(String key, AddressBook ad){
-        System.out.println(ad.toString());
+
         if(multiplebook.containsKey(key)){
-                AddressBook temps= new AddressBook();
-                temps=multiplebook.get(key);
+            AddressBook temps= new AddressBook();
+            temps=multiplebook.get(key);
             for (Person allperson : ad.getAddressbooks()) {
                 temps.getAddressbooks().add(allperson);
             }
-                multiplebook.put(key,temps);
-            }
+            multiplebook.put(key,temps);
+        }
         else{
             AddressBook temps1= new AddressBook();
             for (Person allperson : ad.getAddressbooks()) {
@@ -29,6 +30,7 @@ public class Operations implements IoServices{
             }
             multiplebook.put(key,temps1);
         }
+
 
     }
 
@@ -38,33 +40,34 @@ public class Operations implements IoServices{
         });
     }
 
-    public AddressBook add(){
+    public AddressBook add( Person person_new){
         AddressBook addressBook = new AddressBook();
-        ArrayList<Person> temp_book = new ArrayList<Person>();
-        Person person_new = new Person();
-        System.out.println("enter details of new contact");
-        System.out.println("enter first name:");
-        person_new.first_name = scanner.next();
-        System.out.println("Enter Last Name");
-        person_new.last_name= scanner.next();
-        System.out.println("Enter address");
-        person_new.address= scanner.next();
-        System.out.println("Enter City");
-        person_new.city= scanner.next();
-        System.out.println("Enter State");
-        person_new.state= scanner.next();
-        System.out.println("Enter Zip Code");
-        person_new.zip=scanner.next();
-        System.out.println("Enter Phone Number");
-        person_new.phone_number = scanner.next();
-        System.out.println("Enter Email");
-        person_new.email= scanner.next();
-        temp_book.add(person_new);
-        addressBook.setAddressbooks(temp_book);
-        System.out.println("this is arraylist"+addressBook.addressbooks.toString());
+        AtomicInteger flag = new AtomicInteger();
+        multiplebook.entrySet().forEach(entry ->{
+            entry.getValue().getAddressbooks().forEach(person ->{
+                if(person.getFirst_name().equalsIgnoreCase(person_new.getFirst_name()) &&
+                        person.getLast_name().equalsIgnoreCase(person_new.getLast_name())){
+                    flag.set(1);
+                }
+
+            });
+        });
+        if(flag.get()==0) {
+
+
+            ArrayList<Person> temp_book = new ArrayList<Person>();
+            temp_book.add(person_new);
+            addressBook.setAddressbooks(temp_book);
+            System.out.println("this is arraylist" + addressBook.addressbooks.toString());
+        }
+        else{
+            System.out.println("contact already exists");
+        }
         return addressBook;
     }
-    public void edit(String key,int edit_choice){
+
+
+    public void edit(String key, int edit_choice){
         System.out.println("enter the first name of contact");
         String firstname = scanner.next();
         String value = scanner.next();
@@ -115,5 +118,5 @@ public class Operations implements IoServices{
     }
 
 
-    }
+}
 

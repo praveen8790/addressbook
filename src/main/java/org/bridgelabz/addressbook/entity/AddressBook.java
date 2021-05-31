@@ -1,4 +1,4 @@
-package org.bridgelabz.addressbook.utility;
+package org.bridgelabz.addressbook.entity;
 
 import java.util.ArrayList;
 

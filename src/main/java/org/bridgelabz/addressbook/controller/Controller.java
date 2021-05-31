@@ -2,7 +2,7 @@ package org.bridgelabz.addressbook.controller;
 
 import org.bridgelabz.addressbook.services.IoServices;
 import org.bridgelabz.addressbook.services.Operations;
-import org.bridgelabz.addressbook.utility.Person;
+import org.bridgelabz.addressbook.entity.Person;
 
 import java.util.Scanner;
 
@@ -22,7 +22,7 @@ public class Controller {
             case 1:
                 System.out.println("enter name for address book");
                 String key=scanner.next();
-                operator.addbooks(key, operator.add());
+                operator.addbooks(key, operator.add(null));
                 break;
             case 2:
                 int exit_status1=0;
@@ -54,7 +54,7 @@ public class Controller {
     public int menu1(String key){
         System.out.println("..............................addressbook:"+key+"...............................");
         System.out.println("enter your choice");
-        System.out.println("1.add new contact\n"+"2.edit existing contact\n"+"3.delete existing contact\n"+"4.print theis addressbook\n"+"5.exit");
+        System.out.println("1.add new contact\n"+"2.edit existing contact\n"+"3.delete existing contact\n"+"4.print this addressbook\n"+"5.back");
         int option=scanner.nextInt();
         int exit_status1 = 0;
 
@@ -62,9 +62,25 @@ public class Controller {
             case 0:
 
             case 1:
-                operator.addbooks(key, operator.add());
-
-
+                Person person_new = new Person();
+                System.out.println("enter details of new contact");
+                System.out.println("enter first name:");
+                person_new.first_name = scanner.next();
+                System.out.println("Enter Last Name");
+                person_new.last_name= scanner.next();
+                System.out.println("Enter address");
+                person_new.address= scanner.next();
+                System.out.println("Enter City");
+                person_new.city= scanner.next();
+                System.out.println("Enter State");
+                person_new.state= scanner.next();
+                System.out.println("Enter Zip Code");
+                person_new.zip=scanner.next();
+                System.out.println("Enter Phone Number");
+                person_new.phone_number = scanner.next();
+                System.out.println("Enter Email");
+                person_new.email= scanner.next();
+                operator.addbooks(key, operator.add(person_new));
                 break;
             case 2:
                 System.out.println("1.first name\n"+"2.last name\n"+"3.address\n"+"4.city\n"+"5.state\n"+"6.zip\n"+"7.phone number\n"
