@@ -15,4 +15,5 @@ public interface IoServices {
     void printbook(String key);
     void searchByCityOrState(int cityorstate,String value);
     void dictionaryByCityORState();
+    int getCountByCityState(int cityorstate,String key);
 }

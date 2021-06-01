@@ -18,7 +18,7 @@ public class Controller {
         int exit_status = 0;
         System.out.println("enter number corresponding to ur choice");
         System.out.println("1.add new addressbook\n"+"2.view and choose available addressbooks\n"+"3.print all addressbooks\n"+
-                "4. Search by city or state\n"+"5.exit");
+                "4. Search by city or state\n"+"5.get count by city or state"+"6.exit");
         int option = scanner.nextInt();
         switch (option){
             case 1:
@@ -50,6 +50,12 @@ public class Controller {
                 operator.searchByCityOrState(cityorstate,value);
                 break;
             case 5:
+                System.out.println("enter \n1. city\n 2.state");
+                int temp = scanner.nextInt();
+                System.out.println("enter the value");
+                String temp1= scanner.next();
+                operator.getCountByCityState(temp,temp1);
+            case 6:
                 exit_status=1;
                 break;
         }

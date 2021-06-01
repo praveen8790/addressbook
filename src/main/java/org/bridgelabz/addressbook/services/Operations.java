@@ -175,6 +175,15 @@ public class Operations implements IoServices{
             });
         });
     }
+    public int getCountByCityState(int cityorstate,String key){
+        switch (cityorstate){
+            case 1:
+                return bookbycity.get(key).size();
+            case 2:
+                return bookbystate.get(key).size();
+        }
+        return 0;
+    }
 
 
 
