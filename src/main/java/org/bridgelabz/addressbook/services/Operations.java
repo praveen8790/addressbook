@@ -3,9 +3,10 @@ package org.bridgelabz.addressbook.services;
 import org.bridgelabz.addressbook.entity.AddressBook;
 import org.bridgelabz.addressbook.entity.Person;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.bridgelabz.addressbook.controller.Controller.scanner;
@@ -145,6 +146,26 @@ public class Operations implements IoServices{
                     System.out.println(person.toString());
                 });
         }
+    }
+    public void sortByName(){
+        Person person = new Person();
+       /* multiplebook.entrySet().forEach(entry ->{
+            entry.getValue().getAddressbooks().stream().sorted(Comparator.comparing(Person::getFirst_name)).forEach(s->{
+                System.out.println(s.first_name);
+            });
+        });*/
+        ArrayList <Person> temp = new ArrayList<>();
+        multiplebook.entrySet().stream().map(Map.Entry::getValue)
+                .map(AddressBook::getAddressbooks).
+                forEach(people -> people.stream().sorted(Comparator.comparing(Person::getFirst_name).thenComparing(Person::getLast_name)).forEach(System.out::println));
+
+                        /*sorted(Comparator.comparing(Person::getFirst_name)).forEach(System.out::println));
+                forEach(people -> people.stream().map(Person::getAddress).collect(Collectors.toList()));*/
+        /*multiplebook.entrySet().stream().map(Map.Entry::getValue)
+                .map(AddressBook::getAddressbooks).
+                forEach(people -> people.stream().forEach(person1 -> temp.add(person1)));
+        System.out.println(temp.size());
+        temp.forEach(person1 -> System.out.println(person1.toString()));*/
     }
 
     public void dictionaryByCityORState(){

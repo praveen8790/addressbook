@@ -13,8 +13,11 @@ public class AddressBook {
         this.addressbooks = addressbooks;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "AddressBook{" +
+                "addressbooks=" + addressbooks.toString() +
+                '}';
+    }
 }
 
