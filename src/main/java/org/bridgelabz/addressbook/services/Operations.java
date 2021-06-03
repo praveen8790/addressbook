@@ -167,6 +167,25 @@ public class Operations implements IoServices{
         System.out.println(temp.size());
         temp.forEach(person1 -> System.out.println(person1.toString()));*/
     }
+    public void sortByCityStateZip(int option){
+        switch (option){
+            case 1:
+                multiplebook.entrySet().stream().map(Map.Entry::getValue)
+                        .map(AddressBook::getAddressbooks).
+                        forEach(people -> people.stream().sorted(Comparator.comparing(Person::getCity)).forEach(System.out::println));
+                break;
+            case 2:
+                multiplebook.entrySet().stream().map(Map.Entry::getValue)
+                        .map(AddressBook::getAddressbooks).
+                        forEach(people -> people.stream().sorted(Comparator.comparing(Person::getState)).forEach(System.out::println));
+                break;
+            case 3:
+                multiplebook.entrySet().stream().map(Map.Entry::getValue)
+                        .map(AddressBook::getAddressbooks).
+                        forEach(people -> people.stream().sorted(Comparator.comparing(Person::getZip)).forEach(System.out::println));
+                break;
+        }
+    }
 
     public void dictionaryByCityORState(){
         multiplebook.entrySet().forEach(entry -> {

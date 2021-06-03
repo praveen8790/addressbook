@@ -17,4 +17,5 @@ public interface IoServices {
     void dictionaryByCityORState();
     int getCountByCityState(int cityorstate,String key);
     void sortByName();
+    void sortByCityStateZip(int option);
 }

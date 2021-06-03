@@ -5,6 +5,7 @@ import org.bridgelabz.addressbook.services.IoServices;
 import org.bridgelabz.addressbook.services.Operations;
 import org.bridgelabz.addressbook.entity.Person;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 import static org.bridgelabz.addressbook.services.Operations.multiplebook;
@@ -108,8 +109,13 @@ public class Controller {
             case 5:
                 operator.sortByName();
                 break;
+            case 6 :
+                System.out.println("1.sort by city\n"+"2.sort by state\n"+ "3.sort by zip");
+                operator.sortByCityStateZip(scanner.nextInt());
+                break;
 
-            case 6:
+
+            case 7:
                 exit_status1=1;
                 break;
 
