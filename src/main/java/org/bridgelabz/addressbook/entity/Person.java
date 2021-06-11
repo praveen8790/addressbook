@@ -5,16 +5,15 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "first_name='" + first_name + '\n' +
-                ", last_name='" + last_name + '\n' +
-                ", address='" + address + '\n' +
-                ", city='" + city + '\n' +
-                ", state='" + state + '\n' +
-                ", zip='" + zip + '\n' +
-                ", phone_number='" + phone_number + '\n' +
-                ", email='" + email + '\n' +
-                '}';
+        return  "first_name=" + first_name + '/' +
+                "last_name=" + last_name + '/' +
+                "address=" + address + '/' +
+                "city=" + city + '/' +
+                "state=" + state + '/' +
+                "zip=" + zip + '/' +
+                "phone_number=" + phone_number + '/' +
+                "email=" + email + '/' +
+                '\n';
     }
 
     public String getFirst_name() {

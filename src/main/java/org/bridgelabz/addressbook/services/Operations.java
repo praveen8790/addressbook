@@ -3,6 +3,10 @@ package org.bridgelabz.addressbook.services;
 import org.bridgelabz.addressbook.entity.AddressBook;
 import org.bridgelabz.addressbook.entity.Person;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
@@ -224,8 +228,33 @@ public class Operations implements IoServices{
         }
         return 0;
     }
+    public void writeDataToFile() throws IOException {
+        StringBuffer buffer = new StringBuffer();
+        multiplebook.entrySet().stream().forEach(stringAddressBookEntry -> {
+            String data ="<" + stringAddressBookEntry.getKey()+'\n';
+            buffer.append(data);
+            stringAddressBookEntry.getValue().getAddressbooks().forEach(person -> {
+                String data1 = person.toString();
+                buffer.append(data1);
+            });
+            data = stringAddressBookEntry.getKey() +">";
+            buffer.append(data);
+        });
+        File myfile = new File("C:\\Users\\prave\\IdeaProjects\\addressbook\\src\\main\\assets\\praveen.txt");
+        System.out.println(myfile.getAbsolutePath());
+        FileWriter fileWriter = new FileWriter(myfile);
+        fileWriter.write(String.valueOf(buffer));
+        fileWriter.close();
+    }
 
-
-
+    public void readData() throws FileNotFoundException {
+        File myfile = new File("C:\\Users\\prave\\IdeaProjects\\addressbook\\src\\main\\assets\\praveen.txt");
+        Scanner reader =new Scanner(myfile);
+        while (reader.hasNextLine()) {
+            String data = reader.nextLine();
+            System.out.println(data);
+        }
+        reader.close();
+    }
 }
 

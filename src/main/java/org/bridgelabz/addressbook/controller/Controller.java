@@ -5,6 +5,7 @@ import org.bridgelabz.addressbook.services.IoServices;
 import org.bridgelabz.addressbook.services.Operations;
 import org.bridgelabz.addressbook.entity.Person;
 
+import java.io.IOException;
 import java.sql.SQLOutput;
 import java.util.Scanner;
 
@@ -15,11 +16,11 @@ public class Controller {
     public IoServices operator = new Operations();
     public static final Scanner scanner = new Scanner(System.in);
 
-    public int menu(){
+    public int menu() throws IOException {
         int exit_status = 0;
         System.out.println("enter number corresponding to ur choice");
         System.out.println("1.add new addressbook\n"+"2.view and choose available addressbooks\n"+"3.print all addressbooks\n"+
-                "4. Search by city or state\n"+"5.get count by city or state\n"+"6.exit");
+                "4. Search by city or state\n"+"5.get count by city or state\n"+ " 6.write to .txt file"+"7.read to .txt file"+"8.exit");
         int option = scanner.nextInt();
         switch (option){
             case 1:
@@ -57,8 +58,15 @@ public class Controller {
                 String temp1= scanner.next();
                 operator.getCountByCityState(temp,temp1);
             case 6:
+                operator.writeDataToFile();
+                break;
+            case 7:
+                operator.readData();
+                break;
+            case 8:
                 exit_status=1;
                 break;
+
         }
         return  exit_status;
     }
