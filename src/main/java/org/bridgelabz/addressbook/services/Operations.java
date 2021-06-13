@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 import static org.bridgelabz.addressbook.controller.Controller.scanner;
 
-public class Operations implements IoServices{
+public class Operations {
     public static HashMap<String, AddressBook> multiplebook = new HashMap<String, AddressBook>();
     public static HashMap<String, ArrayList<Person>> bookbycity = new HashMap<>();
     public static HashMap<String, ArrayList<Person>> bookbystate = new HashMap<>();
@@ -60,8 +60,6 @@ public class Operations implements IoServices{
             });
         });
         if(flag.get()==0) {
-
-
             ArrayList<Person> temp_book = new ArrayList<Person>();
             temp_book.add(person_new);
             addressBook.setAddressbooks(temp_book);
@@ -109,6 +107,7 @@ public class Operations implements IoServices{
                 }
         }
     }
+
     public void deletePerson(String key) {
         System.out.println("enter the first name of contact");
         String firstname = scanner.next();
@@ -117,9 +116,11 @@ public class Operations implements IoServices{
                 multiplebook.get(key).getAddressbooks().remove(i);
         }
     }
+
     public void showBooks(){
         System.out.println(multiplebook.keySet());
     }
+
     public void printbook(String key){
         System.out.println(multiplebook.get(key).addressbooks.toString());
     }
@@ -151,6 +152,7 @@ public class Operations implements IoServices{
                 });
         }
     }
+
     public void sortByName(){
         Person person = new Person();
        /* multiplebook.entrySet().forEach(entry ->{
@@ -171,6 +173,7 @@ public class Operations implements IoServices{
         System.out.println(temp.size());
         temp.forEach(person1 -> System.out.println(person1.toString()));*/
     }
+
     public void sortByCityStateZip(int option){
         switch (option){
             case 1:
@@ -219,6 +222,7 @@ public class Operations implements IoServices{
             });
         });
     }
+
     public int getCountByCityState(int cityorstate,String key){
         switch (cityorstate){
             case 1:
@@ -228,6 +232,7 @@ public class Operations implements IoServices{
         }
         return 0;
     }
+
     public void writeDataToFile() throws IOException {
         StringBuffer buffer = new StringBuffer();
         multiplebook.entrySet().stream().forEach(stringAddressBookEntry -> {
@@ -256,5 +261,6 @@ public class Operations implements IoServices{
         }
         reader.close();
     }
+
 }
 

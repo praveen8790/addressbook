@@ -26,4 +26,7 @@ public interface IoServices {
     void sortByCityStateZip(int option);
     void writeDataToFile() throws IOException ;
     void readData() throws FileNotFoundException;
+    void writeCSV() throws IOException;
+    void CSVRead() throws IOException;
+
 }

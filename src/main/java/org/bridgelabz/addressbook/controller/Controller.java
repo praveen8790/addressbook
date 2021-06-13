@@ -1,19 +1,19 @@
 package org.bridgelabz.addressbook.controller;
 
+
 import org.bridgelabz.addressbook.entity.AddressBook;
+import org.bridgelabz.addressbook.services.CSVAndJSONIO;
 import org.bridgelabz.addressbook.services.IoServices;
-import org.bridgelabz.addressbook.services.Operations;
 import org.bridgelabz.addressbook.entity.Person;
 
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 import static org.bridgelabz.addressbook.services.Operations.multiplebook;
 
 
 public class Controller {
-    public IoServices operator = new Operations();
+    public IoServices operator = new CSVAndJSONIO();
     public static final Scanner scanner = new Scanner(System.in);
 
     public int menu() throws IOException {

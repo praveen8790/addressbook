@@ -1,7 +1,24 @@
 package org.bridgelabz.addressbook.entity;
 
+import com.opencsv.bean.CsvBindByName;
+
 public class Person {
-    public String first_name,last_name,address,city,state,zip,phone_number,email;
+    @CsvBindByName(column = "first_name")
+    public String first_name;
+    @CsvBindByName(column = "last_name")
+    public String last_name;
+    @CsvBindByName(column = "address")
+    public String address;
+    @CsvBindByName(column = "city")
+    public String city;
+    @CsvBindByName(column = "state")
+    public String state;
+    @CsvBindByName(column = "zip")
+    public String zip;
+    @CsvBindByName(column = "phone_number")
+    public String phone_number;
+    @CsvBindByName(column = "email")
+    public String email;
 
     @Override
     public String toString() {
