@@ -8,8 +8,10 @@ import org.bridgelabz.addressbook.entity.CSVclass;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class CSVAndJSONIO extends Operations implements IoServices {
     public static final String filepath = "J:\\hi.csv";
@@ -68,6 +70,7 @@ public class CSVAndJSONIO extends Operations implements IoServices {
                 super.addbooks(entry.getKey(), super.add(clas));
             });
         });
+        super.print();
     }
 
     public static void main(String[] args) throws IOException {
