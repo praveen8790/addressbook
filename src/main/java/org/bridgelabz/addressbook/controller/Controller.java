@@ -19,8 +19,14 @@ public class Controller {
     public int menu() throws IOException {
         int exit_status = 0;
         System.out.println("enter number corresponding to ur choice");
-        System.out.println("1.add new addressbook\n"+"2.view and choose available addressbooks\n"+"3.print all addressbooks\n"+
-                "4. Search by city or state\n"+"5.get count by city or state\n"+ " 6.write to .txt file"+"7.read to .txt file"+"8.exit");
+        System.out.println("1.add new addressbook\n"+
+                "2.view and choose available addressbooks\n"+
+                "3.print all addressbooks\n"+
+                "4. Search by city or state\n"+
+                "5.get count by city or state\n"+
+                " 6.write to .txt file\n"+
+                "7.read to .txt file\n"+
+                "8.exit");
         int option = scanner.nextInt();
         switch (option){
             case 1:
@@ -73,8 +79,11 @@ public class Controller {
     public int menu1(String key){
         System.out.println("..............................addressbook:"+key+"...............................");
         System.out.println("enter your choice");
-        System.out.println("1.add new contact\n"+"2.edit existing contact\n"+"3.delete existing contact\n"+
-                "4.print this addressbook\n"+"5.Sort by name"+"6.back");
+        System.out.println("1.add new contact\n"+
+                "2.edit existing contact\n"+
+                "3.delete existing contact\n"+
+                "4.print this addressbook\n"+
+                "5.Sort by name"+"6.back");
         int option=scanner.nextInt();
         int exit_status1 = 0;
 
@@ -106,7 +115,9 @@ public class Controller {
                 System.out.println("1.first name\n"+"2.last name\n"+"3.address\n"+"4.city\n"+"5.state\n"+"6.zip\n"+"7.phone number\n"
                         +"8.email");
                 int edit_option=scanner.nextInt();
-                operator.edit(key,edit_option);
+                String value = scanner.next();
+                operator.edit(key,edit_option,value);
+
                 break;
             case 3:
                 operator.deletePerson(key);

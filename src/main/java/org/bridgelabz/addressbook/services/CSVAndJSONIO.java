@@ -73,11 +73,4 @@ public class CSVAndJSONIO extends Operations implements IoServices {
         super.print();
     }
 
-    public static void main(String[] args) throws IOException {
-        CSVAndJSONIO operations = new CSVAndJSONIO();
-
-        operations.readJson();
-
-
-    }
 }

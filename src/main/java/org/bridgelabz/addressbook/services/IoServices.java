@@ -15,7 +15,7 @@ public interface IoServices {
     void print();
 
 
-    void edit(String key, int edit_choice);
+    void edit(String key, int edit_choice,String value);
     void deletePerson(String key);
     void showBooks();
     void printbook(String key);

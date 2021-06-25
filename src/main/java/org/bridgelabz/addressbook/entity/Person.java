@@ -22,15 +22,8 @@ public class Person {
 
     @Override
     public String toString() {
-        return  "first_name=" + first_name + '/' +
-                "last_name=" + last_name + '/' +
-                "address=" + address + '/' +
-                "city=" + city + '/' +
-                "state=" + state + '/' +
-                "zip=" + zip + '/' +
-                "phone_number=" + phone_number + '/' +
-                "email=" + email + '/' +
-                '\n';
+        return String.format("'%s','%s','%s','%s','%s',%s,%s,'%s'",
+                first_name,last_name,address,city,state,zip,phone_number,email);
     }
 
     public String getFirst_name() {
@@ -97,4 +90,15 @@ public class Person {
         this.email = email;
     }
 
+    public void add(String first_name, String last_name, String address, String city, String state, String zip, String phone_number, String email) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.phone_number = phone_number;
+        this.email = email;
+
+    }
 }

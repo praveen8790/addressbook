@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -16,7 +17,7 @@ import java.util.stream.Stream;
 import static org.bridgelabz.addressbook.controller.Controller.scanner;
 
 public class Operations {
-    public static HashMap<String, AddressBook> multiplebook = new HashMap<String, AddressBook>();
+    public static HashMap<String, AddressBook> multiplebook;
     public static HashMap<String, ArrayList<Person>> bookbycity = new HashMap<>();
     public static HashMap<String, ArrayList<Person>> bookbystate = new HashMap<>();
 
@@ -72,10 +73,9 @@ public class Operations {
     }
 
 
-    public void edit(String key, int edit_choice){
+    public void edit(String key, int edit_choice,String value){
         System.out.println("enter the first name of contact");
         String firstname = scanner.next();
-        String value = scanner.next();
         for(int i=0;i<multiplebook.get(key).getAddressbooks().size();i++) {
             if (multiplebook.get(key).getAddressbooks().get(i).getFirst_name().equalsIgnoreCase(firstname))
                 switch (edit_choice) {
@@ -126,20 +126,6 @@ public class Operations {
     }
 
     public void searchByCityOrState(int cityorstate,String value){
-        /*multiplebook.entrySet().forEach(entry ->{
-            entry.getValue().getAddressbooks().forEach(person -> {
-                        switch (cityorstate){
-                            case 1:
-                                if(person.getCity().equalsIgnoreCase(value))
-                                    System.out.println(person.toString());
-                                break;
-                            case 2:
-                                if(person.getState().equalsIgnoreCase(value))
-                                    System.out.println(person.toString());
-                                break;
-                        }
-                    });
-                });*/
         switch (cityorstate){
             case 1:
                 bookbycity.get(value).forEach(person -> {
@@ -155,24 +141,11 @@ public class Operations {
 
     public void sortByName(){
         Person person = new Person();
-       /* multiplebook.entrySet().forEach(entry ->{
-            entry.getValue().getAddressbooks().stream().sorted(Comparator.comparing(Person::getFirst_name)).forEach(s->{
-                System.out.println(s.first_name);
-            });
-        });*/
         ArrayList <Person> temp = new ArrayList<>();
         multiplebook.entrySet().stream().map(Map.Entry::getValue)
                 .map(AddressBook::getAddressbooks).
                 forEach(people -> people.stream().sorted(Comparator.comparing(Person::getFirst_name).thenComparing(Person::getLast_name)).forEach(System.out::println));
-
-                        /*sorted(Comparator.comparing(Person::getFirst_name)).forEach(System.out::println));
-                forEach(people -> people.stream().map(Person::getAddress).collect(Collectors.toList()));*/
-        /*multiplebook.entrySet().stream().map(Map.Entry::getValue)
-                .map(AddressBook::getAddressbooks).
-                forEach(people -> people.stream().forEach(person1 -> temp.add(person1)));
-        System.out.println(temp.size());
-        temp.forEach(person1 -> System.out.println(person1.toString()));*/
-    }
+ }
 
     public void sortByCityStateZip(int option){
         switch (option){
@@ -260,6 +233,17 @@ public class Operations {
             System.out.println(data);
         }
         reader.close();
+    }
+    public boolean searchByName(String first_name){
+        AtomicBoolean returned = new AtomicBoolean(false);
+        multiplebook.entrySet().forEach(entry ->{
+            entry.getValue().getAddressbooks().forEach(person ->{
+                if(person.getFirst_name().equalsIgnoreCase(first_name)) {
+                     returned.set(true);
+                }
+            });
+        });
+        return returned.get();
     }
 
 }
