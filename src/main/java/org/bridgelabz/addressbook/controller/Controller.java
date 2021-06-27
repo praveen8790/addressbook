@@ -25,7 +25,7 @@ public class Controller {
                 "4. Search by city or state\n"+
                 "5.get count by city or state\n"+
                 " 6.write to .txt file\n"+
-                "7.read to .txt file\n"+
+                "7.read from .txt file\n"+
                 "8.exit");
         int option = scanner.nextInt();
         switch (option){
@@ -72,7 +72,6 @@ public class Controller {
             case 8:
                 exit_status=1;
                 break;
-
         }
         return  exit_status;
     }
@@ -132,14 +131,9 @@ public class Controller {
                 System.out.println("1.sort by city\n"+"2.sort by state\n"+ "3.sort by zip");
                 operator.sortByCityStateZip(scanner.nextInt());
                 break;
-
-
             case 7:
                 exit_status1=1;
                 break;
-
-
-
         }
         return exit_status1;
 

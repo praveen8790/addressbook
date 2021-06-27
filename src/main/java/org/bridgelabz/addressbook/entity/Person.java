@@ -99,6 +99,5 @@ public class Person {
         this.zip = zip;
         this.phone_number = phone_number;
         this.email = email;
-
     }
 }

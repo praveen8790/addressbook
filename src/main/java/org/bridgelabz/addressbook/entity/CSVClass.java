@@ -4,7 +4,7 @@ import com.opencsv.bean.CsvBindByName;
 
 import java.util.Iterator;
 
-public class CSVclass extends Person {
+public class CSVClass extends Person {
     @CsvBindByName(column = "addressbook")
     public String addressbookname;
 
