@@ -17,19 +17,20 @@ import java.util.stream.Stream;
 import static org.bridgelabz.addressbook.controller.Controller.scanner;
 
 public class Operations {
-    public static HashMap<String, AddressBook> multiplebook;
+    public static HashMap<String, AddressBook> multiplebook= new HashMap<String,AddressBook>();
     public static HashMap<String, ArrayList<Person>> bookbycity = new HashMap<>();
     public static HashMap<String, ArrayList<Person>> bookbystate = new HashMap<>();
 
 
     public void addbooks(String key,AddressBook ad){
-
         if(multiplebook.containsKey(key)){
-            AddressBook temps= new AddressBook();
-            temps=multiplebook.get(key);
+            AddressBook temps = new AddressBook();
+            temps.setAddressbooks(multiplebook.get(key).getAddressbooks());
+            System.out.println(temps.getAddressbooks().toString());
             for (Person allperson : ad.getAddressbooks()) {
                 temps.getAddressbooks().add(allperson);
             }
+            System.out.println(temps.getAddressbooks().toString());
             multiplebook.put(key,temps);
         }
         else{
@@ -37,6 +38,7 @@ public class Operations {
             for (Person allperson : ad.getAddressbooks()) {
                 temps1.getAddressbooks().add(allperson);
             }
+            System.out.println(temps1.getAddressbooks().toString());
             multiplebook.put(key,temps1);
         }
 
@@ -52,19 +54,20 @@ public class Operations {
     public AddressBook add( Person person_new){
         AddressBook addressBook = new AddressBook();
         AtomicInteger flag = new AtomicInteger();
-        multiplebook.entrySet().forEach(entry ->{
-            entry.getValue().getAddressbooks().forEach(person ->{
-                if(person.getFirst_name().equalsIgnoreCase(person_new.getFirst_name()) &&
-                        person.getLast_name().equalsIgnoreCase(person_new.getLast_name())){
-                    flag.set(1);
-                }
+        flag.set(0);
+        if(!multiplebook.entrySet().isEmpty()) {
+            multiplebook.entrySet().forEach(entry -> {
+                entry.getValue().getAddressbooks().forEach(person -> {
+                    if (person.getFirst_name().equalsIgnoreCase(person_new.getFirst_name())) {
+                        flag.set(1);
+                    }
+                });
             });
-        });
+        }
         if(flag.get()==0) {
             ArrayList<Person> temp_book = new ArrayList<Person>();
             temp_book.add(person_new);
             addressBook.setAddressbooks(temp_book);
-            System.out.println("this is arraylist" + addressBook.addressbooks.toString());
         }
         else{
             System.out.println("contact already exists");
@@ -244,6 +247,16 @@ public class Operations {
             });
         });
         return returned.get();
+    }
+    public void printall(){
+        multiplebook.entrySet().forEach(stringAddressBookEntry -> {
+            stringAddressBookEntry.getValue().addressbooks.forEach(person -> {
+                if (person.first_name .equals("tarun"))
+                    System.out.println(person.toString());
+                System.out.println(person.toString());
+            });
+        });
+
     }
 
 }

@@ -100,4 +100,15 @@ public class Person {
         this.phone_number = phone_number;
         this.email = email;
     }
+    public void addFromCSVClass(CSVClass person){
+        this.first_name = person.first_name;
+        this.last_name = person.last_name;
+        this.address = person.address;
+        this.city = person.city;
+        this.state = person.state;
+        this.zip = person.zip;
+        this.phone_number = person.phone_number;
+        this.email = person.email;
+    }
+
 }

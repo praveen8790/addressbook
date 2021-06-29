@@ -7,15 +7,12 @@ import java.util.Iterator;
 public class CSVClass extends Person {
     @CsvBindByName(column = "addressbook")
     public String addressbookname;
-
     public String getAddressbookname() {
         return addressbookname;
     }
-
     public void setAddressbookname(String addressbookname) {
         this.addressbookname = addressbookname;
     }
-
     @Override
     public String toString() {
         return

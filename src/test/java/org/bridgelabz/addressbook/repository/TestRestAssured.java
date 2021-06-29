@@ -5,6 +5,8 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.bridgelabz.addressbook.entity.CSVClass;
+import org.bridgelabz.addressbook.entity.Person;
+import org.bridgelabz.addressbook.services.CSVAndJSONIO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,13 +19,13 @@ public class TestRestAssured {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = 3000;
     }
-    public CSVClass[] getEmployeeList(){
+    public CSVClass[] getPersonList(){
         Response response = RestAssured.get( "/persons");
         CSVClass[] arrayOfPersons = new Gson().fromJson(response.asString(), CSVClass[].class);
         Arrays.asList(arrayOfPersons).forEach(csVclass -> System.out.println(csVclass.toString()));
         return arrayOfPersons;
     }
-    public Response addEmployeeToJsonServer(CSVClass person) {
+    public Response addPersonToJsonServer(CSVClass person) {
         String personJson = new Gson().toJson(person);
         RequestSpecification request = RestAssured.given();
         request.contentType("application/json");
@@ -33,7 +35,16 @@ public class TestRestAssured {
     @Test
     public void givenPersonDataInJSONServer_WhenRetrieved_ShouldMatchTheCount()
     {
-        Assert.assertEquals(4,getEmployeeList().length);
+        CSVAndJSONIO csvAndJSONIO = new CSVAndJSONIO();
+        CSVClass[] personList = getPersonList();
+        Person personObj = new Person();
+        for (CSVClass person : personList) {
+            personObj.addFromCSVClass(person);
+            System.out.println(personObj);
+            csvAndJSONIO.addbooks(person.getAddressbookname(),csvAndJSONIO.add(personObj));
+        }
+        csvAndJSONIO.print();
+        Assert.assertEquals(4,personList.length);
     }
 
     @Test
@@ -42,9 +53,17 @@ public class TestRestAssured {
         person.add("ravi","choudhary","ank","gadhwal","AP","3424234",
                 "8790324234","ravi@gmail.com");
         person.setAddressbookname("addr_1");
-        Response response = addEmployeeToJsonServer(person);
+        Response response = addPersonToJsonServer(person);
         int status = response.getStatusCode();
         Assert.assertEquals(201,status);
+        CSVAndJSONIO csvAndJSONIO = new CSVAndJSONIO();
+        CSVClass[] personList = getPersonList();
+        Person personObj = new Person();
+        for (CSVClass person1 : personList) {
+            personObj.addFromCSVClass(person1);
+            System.out.println(personObj);
+            csvAndJSONIO.addbooks(person.getAddressbookname(),csvAndJSONIO.add(personObj));
+        }
     }
 
     @Test
@@ -60,8 +79,16 @@ public class TestRestAssured {
         persons[1].setAddressbookname("addr_2");
         persons[2].setAddressbookname("addr_1");
         for (CSVClass person : persons) {
-            int status = addEmployeeToJsonServer(person).getStatusCode();
+            int status = addPersonToJsonServer(person).getStatusCode();
             Assert.assertEquals(201,status);
+        }
+        CSVAndJSONIO csvAndJSONIO = new CSVAndJSONIO();
+        CSVClass[] personList = getPersonList();
+        Person personObj = new Person();
+        for (CSVClass person : personList) {
+            personObj.addFromCSVClass(person);
+            System.out.println(personObj);
+            csvAndJSONIO.addbooks(person.getAddressbookname(),csvAndJSONIO.add(personObj));
         }
     }
 
@@ -77,7 +104,14 @@ public class TestRestAssured {
         request.body(personJson);
         int status= request.put("/persons/"+person.getFirst_name()).getStatusCode();
         Assert.assertEquals(200,status);
-
+        CSVAndJSONIO csvAndJSONIO = new CSVAndJSONIO();
+        CSVClass[] personList = getPersonList();
+        Person personObj = new Person();
+        for (CSVClass person1 : personList) {
+            personObj.addFromCSVClass(person1);
+            System.out.println(personObj);
+            csvAndJSONIO.addbooks(person.getAddressbookname(),csvAndJSONIO.add(personObj));
+        }
     }
 
     @Test
@@ -88,5 +122,13 @@ public class TestRestAssured {
         Response response = request.delete("/persons/"+first_name);
         int statusCode = response.getStatusCode();
         Assert.assertEquals(200,statusCode);
+        CSVAndJSONIO csvAndJSONIO = new CSVAndJSONIO();
+        CSVClass[] personList = getPersonList();
+        Person personObj = new Person();
+        for (CSVClass person : personList) {
+            personObj.addFromCSVClass(person);
+            System.out.println(personObj);
+            csvAndJSONIO.addbooks(person.getAddressbookname(),csvAndJSONIO.add(personObj));
+        }
     }
 }
